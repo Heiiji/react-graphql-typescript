@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from './organism/Header';
 import SearchZone from './organism/SearchZone';
+import RoomList from './organism/RoomList';
 import { useQuery, gql } from '@apollo/client';
 
 const EXCHANGE_RATES = gql`
@@ -16,6 +17,7 @@ function App() {
     <div className="App">
       <Header/>
       <SearchZone/>
+      <RoomList/>
     </div>
   );
 }

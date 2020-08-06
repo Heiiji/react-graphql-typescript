@@ -8,7 +8,7 @@ type CardProps = {
 
 function Room({room}: CardProps) {
   return (
-    <div className="card m-3" style={{ maxWidth: 540 }}>
+    <div className="card m-3 room-tile" style={{ maxWidth: 540 }}>
         <div className="row no-gutters">
             <div className="col-md-4">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Apartement.jpg" className="card-img" alt="..."/>

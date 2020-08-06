@@ -1,4 +1,4 @@
-import {User, IS_CONNECTED} from "./types";
+import {User, IS_CONNECTED, IS_DISCONNECTED} from "./types";
 import API from "../../_helpers/api";
 import store from "../index";
 
@@ -21,5 +21,10 @@ export const connectUser = (email: string, password: string) => {
 }
 
 export const disconnectUser = () => {
-    return;
+    return new Promise((resolve) => {
+        store.dispatch({
+            type: IS_DISCONNECTED
+        });
+        resolve();
+    })
 }

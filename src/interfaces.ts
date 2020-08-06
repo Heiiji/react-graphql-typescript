@@ -6,11 +6,19 @@ export interface IUser {
     role:       string
 }
 
-export interface IRoom {
+export interface IProperty {
     id:         string,
     location:   string,
+    description:string,
+    date:       string,
+    size:       number
+}
+
+export interface IRoom {
+    id:         string,
     size:       number,
     description:string,
     date:       string,
-    user:       IUser
+    user:       IUser,
+    property:   IProperty
 }

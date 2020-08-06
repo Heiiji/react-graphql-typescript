@@ -7,13 +7,20 @@ const query = gql`
 {
     rooms{
         id,
-        location,
         size,
         description,,
         date,
         user{
             id,
-            firstName
+            firstName,
+            email
+        },
+        property{
+            id,
+            location,
+            description,
+            date,
+            size
         }
     }
 }

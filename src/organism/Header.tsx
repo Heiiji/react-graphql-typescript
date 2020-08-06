@@ -2,9 +2,14 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import {useSelector} from "react-redux";
 import {getUser} from "../store/selectors";
+import {disconnectUser} from "../store/user/actions";
 
 function Header() {
     const user = useSelector(getUser);
+
+    const _onLogout = () => {
+        disconnectUser();
+    }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,7 +34,9 @@ function Header() {
         <ul className="navbar-nav">
             <li className="nav-item active">
                 {
-                    user.isConnected ?  <Link className="nav-link" to="/">Logout</Link> : <Link className="nav-link" to="/auth">Login</Link>
+                    user.isConnected ?
+                        <Link onClick={_onLogout} className="nav-link" to="/">Logout</Link> :
+                        <Link className="nav-link" to="/auth">Login</Link>
                 }
             </li>
         </ul>

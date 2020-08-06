@@ -15,7 +15,7 @@ function Room({room}: CardProps) {
             </div>
             <div className="col-md-8">
             <div className="card-body">
-                <h5 className="card-title">{room.location}</h5>
+                <h5 className="card-title">{room.property.location}</h5>
                 <p className="card-text">{ room.description }</p>
                 <p className="card-text">
                     { moment(room.date).format('MMMM Do YYYY') }

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Header from '../organism/Header';
-import API from "../_helpers/api";
+import {connectUser} from "../store/user/actions";
+import { withRouter } from 'react-router-dom'
 
 // TODO : Use a library or a powerfull safemade error managment
 
-function Auth() {
+function Auth(props: any) {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -12,21 +13,21 @@ function Auth() {
 
     const _onSubmit = (ev: any) => {
         ev.preventDefault();
+        if (loading) {
+            return;
+        }
         if (!email || !password) {
             setAlert("Please enter valid credentials");
             return;
         }
         setAlert("");
         setLoading(true);
-        API.post("/auth", {
-            email,
-            password
-        }).then(res => {
-            setLoading(false);
+        connectUser(email, password).then(res => {
+            props.history.push('/')
         }).catch(() => {
             setLoading(false);
             setAlert("Invalid Credentials");
-        })
+        });
     }
 
     return (
@@ -53,7 +54,12 @@ function Auth() {
                         {
                             alert && <p className="alert alert-warning">{alert}</p>
                         }
-                        <button className="btn btn-outline-primary">Connect</button>
+                        <button className="btn btn-outline-primary">
+                            {
+                                loading ?
+                                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"/> : "Connect"
+                            }
+                        </button>
                     </form>
                 </div>
             </div>
@@ -61,4 +67,4 @@ function Auth() {
     );
 }
 
-export default Auth;
+export default withRouter(Auth);

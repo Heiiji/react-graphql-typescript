@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import {useSelector} from "react-redux";
+import {getUser} from "../store/selectors";
 
 function Header() {
+    const user = useSelector(getUser);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">myHome</Link>
@@ -16,13 +20,17 @@ function Header() {
                     Home <span className="sr-only">(current)</span>
                 </Link>
             </li>
-            <li className="nav-item">
-                <a className="nav-link" href="#">My Rooms</a>
-            </li>
+            {
+                user.role === 0 && <li className="nav-item">
+                    <a className="nav-link" href="#">My Rooms</a>
+                </li>
+            }
         </ul>
         <ul className="navbar-nav">
             <li className="nav-item active">
-                <Link className="nav-link" to="/auth">Connection</Link>
+                {
+                    user.isConnected ?  <Link className="nav-link" to="/">Logout</Link> : <Link className="nav-link" to="/auth">Login</Link>
+                }
             </li>
         </ul>
         </div>

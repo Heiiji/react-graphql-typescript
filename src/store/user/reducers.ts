@@ -4,8 +4,9 @@ import {
     IS_DISCONNECTED,
     IS_CONNECTED
   } from './types'
-  
+
   const initialState: UserState = {
+    isConnected: false
   }
   
   export function userReducer(

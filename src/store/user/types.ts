@@ -1,9 +1,10 @@
 
-export interface Message {
-    username: string,
+export interface User {
     email: string,
-    image: string,
-    role: string
+    firstName: string,
+    id: string,
+    role: number,
+    isConnected: boolean
 }
 
 export const IS_CONNECTED = 'IS_CONNECTED'
@@ -11,7 +12,7 @@ export const IS_DISCONNECTED = 'IS_DISCONNECTED'
 
 interface ConnectionAction {
   type: typeof IS_CONNECTED
-  payload: Message
+  payload: User
 }
 
 interface DeconnectionAction {
@@ -19,7 +20,7 @@ interface DeconnectionAction {
 }
 
 export interface UserState {
-    
+
   }
 
 export type UserActionsTypes = ConnectionAction | DeconnectionAction

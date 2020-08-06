@@ -1,14 +1,21 @@
 import React from 'react';
 import moment from "moment";
 import { IRoom } from "../interfaces";
+import { useHistory } from "react-router-dom";
 
 type CardProps = {
     room: IRoom
 }
 
 function Room({room}: CardProps) {
+    const history = useHistory();
+
+    const handleClick = () => {
+        history.push(`/room/${room.id}`);
+    }
+
   return (
-    <div className="card m-3 room-tile" style={{ maxWidth: 540 }}>
+    <div onClick={handleClick} className="card m-3 room-tile" style={{ maxWidth: 540 }}>
         <div className="row no-gutters">
             <div className="col-md-4">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Apartement.jpg" className="card-img" alt="..."/>

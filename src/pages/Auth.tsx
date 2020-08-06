@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../organism/Header';
 import {connectUser} from "../store/user/actions";
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 
 // TODO : Use a library or a powerfull safemade error managment
 

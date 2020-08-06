@@ -19,6 +19,7 @@ export interface IProperty {
     description:string,
     date:       string,
     size:       number,
+    images:     [string],
     rooms:      [IRoom]
 }
 
@@ -29,6 +30,7 @@ export interface IRoom {
     date:       string,
     price:      number,
     active:     boolean,
+    images:     [string],
     bookings:   [IBooking],
     user:       IUser,
     property:   IProperty

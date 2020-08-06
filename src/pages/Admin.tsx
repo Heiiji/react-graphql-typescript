@@ -14,6 +14,7 @@ function AdminDetails() {
         description,
         date,
         size,
+        images,
         rooms{
             id,
             active,
@@ -21,6 +22,7 @@ function AdminDetails() {
             price,
             description,
             date,
+            images,
             bookings{
                 id,
                 date,

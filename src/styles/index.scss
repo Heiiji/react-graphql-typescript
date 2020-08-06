@@ -1,6 +1,13 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "./molecules/Room";
+@import "./molecules/PropertyHead";
 @import "src/styles/pages/Admin";
+
+$theme-colors: (
+    "primary": #ffc107,
+    "secondary": #515151,
+    "danger": #ff4136
+);
 
 
 // NOTE: je n'ai pas pu installer https://styled-components.com/ donc je style ici (404 sur dep emotion)

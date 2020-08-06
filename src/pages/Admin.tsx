@@ -3,6 +3,7 @@ import Header from '../organism/Header';
 import {gql, useQuery} from "@apollo/client";
 import {IProperty, IRoom} from "../interfaces";
 import StateSnippet from "../molecules/StateSnippet";
+import PropertyHead from "../molecules/PropertyHead";
 
 function AdminDetails() {
     const [selection, setSeletion] = useState<IProperty>();
@@ -88,6 +89,9 @@ function AdminDetails() {
                         <h1 className="mb-4">
                             My properties
                         </h1>
+                        {
+                            selection ? <PropertyHead property={selection} /> : ""
+                        }
                         <ul className="list-group properties-list">
                             {
                                 selection ? selection.rooms.map((room:IRoom) => <li key={room.id} className="list-group-item d-flex justify-content-between align-items-center">

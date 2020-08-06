@@ -19,27 +19,27 @@ function Header() {
         </button>
     
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-                <Link className="nav-link" to="/">
-                    Home <span className="sr-only">(current)</span>
-                </Link>
-            </li>
-            {
-                user.role === 0 && <li className="nav-item">
-                    <a className="nav-link" href="#">My Rooms</a>
+            <ul className="navbar-nav mr-auto">
+                <li className="nav-item active">
+                    <Link className="nav-link" to="/">
+                        Home <span className="sr-only">(current)</span>
+                    </Link>
                 </li>
-            }
-        </ul>
-        <ul className="navbar-nav">
-            <li className="nav-item active">
                 {
-                    user.isConnected ?
-                        <Link onClick={_onLogout} className="nav-link" to="/">Logout</Link> :
-                        <Link className="nav-link" to="/auth">Login</Link>
+                    user.role === 0 && <li className="nav-item">
+                        <Link className="nav-link" to="/admin">My profil</Link>
+                    </li>
                 }
-            </li>
-        </ul>
+            </ul>
+            <ul className="navbar-nav">
+                <li className="nav-item active">
+                    {
+                        user.isConnected ?
+                            <Link onClick={_onLogout} className="nav-link" to="/">Logout</Link> :
+                            <Link className="nav-link" to="/auth">Login</Link>
+                    }
+                </li>
+            </ul>
         </div>
     </nav>
   );

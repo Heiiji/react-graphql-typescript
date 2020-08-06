@@ -1,0 +1,10 @@
+.properties-list {
+  li {
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(100, 100, 100, 0.3);
+    }
+  }
+}

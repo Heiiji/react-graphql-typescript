@@ -6,12 +6,20 @@ export interface IUser {
     role:       string
 }
 
+export interface IBooking {
+    id:         string,
+    date:       string,
+    userId:     string
+    message:    string
+}
+
 export interface IProperty {
     id:         string,
     location:   string,
     description:string,
     date:       string,
-    size:       number
+    size:       number,
+    rooms:      [IRoom]
 }
 
 export interface IRoom {
@@ -19,6 +27,9 @@ export interface IRoom {
     size:       number,
     description:string,
     date:       string,
+    price:      number,
+    active:     boolean,
+    bookings:   [IBooking],
     user:       IUser,
     property:   IProperty
 }

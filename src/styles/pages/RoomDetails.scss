@@ -1,0 +1,18 @@
+.cta-container {
+  text-align: center;
+  .cta {
+    color: white;
+    width: 200px;
+    padding: 10px;
+    font-size: 1.3em;
+    border-radius: 50px;
+    transition: 0.2s;
+    background-color: theme-color("primary");
+    border: none;
+    box-shadow: 0 0 5px rgba(100, 100, 100, 0.3);
+
+    &:hover {
+      box-shadow: 0 0 8px rgba(100, 100, 100, 0.5);
+    }
+  }
+}

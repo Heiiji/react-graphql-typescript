@@ -38,14 +38,32 @@ function RoomDetails() {
 
     const slideSize = data.room.images.length + data.room.property.images.length;
 
+    const slideNext = () => {
+        let cursor = activeImage;
+        cursor += 1;
+        if (cursor >= slideSize) {
+            cursor = 0;
+        }
+        setActiveImage(cursor);
+    }
+
+    const slidePrev = () => {
+        let cursor = activeImage;
+        cursor -= 1;
+        if (cursor < 0) {
+            cursor = slideSize - 1;
+        }
+        setActiveImage(cursor);
+    }
+
     return (
         <div>
             <Header/>
             <div className="container">
                 <div className="row mt-5">
                     <div className="col-md-8">
-                        <div id="carouselExampleCaptions" className="carousel slide" data-ride="carousel">
-                            <div className="carousel-inner">
+                        <div id="carouselExampleCaptions" className="carousel slide" data-ride="carousel" style={{height: 500}}>
+                            <div className="carousel-inner h-100">
                                 {
                                     data.room.images.map((img : string, index: number) => <div key={img} className={`carousel-item ${activeImage === index ? "active" : ""}`}>
                                         <img src={img} className="d-block w-100" alt="..."/>
@@ -64,12 +82,12 @@ function RoomDetails() {
                                 }
                             </div>
                             <a className="carousel-control-prev" href="#carouselExampleCaptions" role="button"
-                               data-slide="prev" onClick={() => setActiveImage(activeImage - 1)}>
+                               data-slide="prev" onClick={slidePrev}>
                                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span className="sr-only">Previous</span>
                             </a>
                             <a className="carousel-control-next" href="#carouselExampleCaptions" role="button"
-                               data-slide="next" onClick={() => setActiveImage(activeImage + 1)}>
+                               data-slide="next" onClick={slideNext}>
                                 <span className="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span className="sr-only">Next</span>
                             </a>
@@ -82,7 +100,9 @@ function RoomDetails() {
                     </div>
                     <div className="col-md-4">
                         <StateSnippet title="Price" state={data.room.price + "€"} highlight={""}/>
-                        <button>Book now!</button>
+                        <div className="cta-container">
+                            <button className="cta">Book now!</button>
+                        </div>
                     </div>
                 </div>
             </div>

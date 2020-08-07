@@ -1,14 +1,21 @@
-@import '~bootstrap/dist/css/bootstrap.min.css';
+// Bootstrap here
+
+$theme-colors: (
+        "primary": #ffc107,
+        "secondary": #515151,
+        "danger": #ff4136
+);
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+// our scss here
+
+@import "./organism/Header";
 @import "./molecules/Room";
 @import "./molecules/Modal";
 @import "./molecules/PropertyHead";
 @import "src/styles/pages/Admin";
-
-$theme-colors: (
-    "primary": #ffc107,
-    "secondary": #515151,
-    "danger": #ff4136
-);
+@import "src/styles/pages/RoomDetails";
 
 
 // NOTE: je n'ai pas pu installer https://styled-components.com/ donc je style ici (404 sur dep emotion)
@@ -21,10 +28,5 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 

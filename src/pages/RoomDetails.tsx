@@ -50,8 +50,7 @@ function RoomDetails() {
                                     data.room.images.map((img : string, index: number) => <div key={img} className={`carousel-item ${activeImage === index ? "active" : ""}`}>
                                         <img src={img} className="d-block w-100" alt="..."/>
                                         <div className="carousel-caption d-none d-md-block">
-                                            <h5>First slide label</h5>
-                                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                            <h5>Room preview</h5>
                                         </div>
                                     </div>)
                                 }
@@ -59,8 +58,7 @@ function RoomDetails() {
                                     data.room.property.images.map((img : string, index: number) => <div key={img} className={`carousel-item ${activeImage === (data.room.images.length + index) ? "active" : ""}`}>
                                         <img src={img} className="d-block w-100" alt="..."/>
                                         <div className="carousel-caption d-none d-md-block">
-                                            <h5>First slide label</h5>
-                                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                            <h5>Appartment preview</h5>
                                         </div>
                                     </div>)
                                 }
@@ -76,9 +74,15 @@ function RoomDetails() {
                                 <span className="sr-only">Next</span>
                             </a>
                         </div>
+                        <h3>{`${data.room.property.location} - ${data.room.size}m`}</h3>
+                        <p>{data.room.description}</p>
+                        <hr/>
+                        <h3>{`Property - ${data.room.property.size}m`}</h3>
+                        <p>{data.room.property.description}</p>
                     </div>
                     <div className="col-md-4">
                         <StateSnippet title="Price" state={data.room.price + "€"} highlight={""}/>
+                        <button>Book now!</button>
                     </div>
                 </div>
             </div>

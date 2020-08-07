@@ -4,9 +4,11 @@ import {gql, useQuery} from "@apollo/client";
 import {IProperty, IRoom} from "../interfaces";
 import StateSnippet from "../molecules/StateSnippet";
 import PropertyHead from "../molecules/PropertyHead";
+import Modal from "../molecules/Modal";
 
 function AdminDetails() {
     const [selection, setSeletion] = useState<IProperty>();
+    const [modalShow, setModalShow] = useState<boolean>(false);
     const query = gql`
 {
     properties(userId: "2"){
@@ -89,12 +91,18 @@ function AdminDetails() {
                         <h1 className="mb-4">
                             My properties
                         </h1>
+
+
+                        <Modal title="Manage" show={modalShow} onHide={() => setModalShow(false)} >
+                            <p>coucou</p>
+                        </Modal>
+
                         {
                             selection ? <PropertyHead property={selection} /> : ""
                         }
                         <ul className="list-group properties-list">
                             {
-                                selection ? selection.rooms.map((room:IRoom) => <li key={room.id} className="list-group-item d-flex justify-content-between align-items-center">
+                                selection ? selection.rooms.map((room:IRoom) => <li onClick={() => setModalShow(true)} key={room.id} className="list-group-item d-flex justify-content-between align-items-center">
                                     { `${room.price}€ - ${room.size}m²` }
                                     {
                                         room.bookings.length > 0 ?

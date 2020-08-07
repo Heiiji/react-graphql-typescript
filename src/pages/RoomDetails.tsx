@@ -37,6 +37,7 @@ function RoomDetails() {
             <div className="container">
                 <div className="row mt-5">
                     <div className="col-md-8">
+                        {data.id}
                     </div>
                     <div className="col-md-4">
                     </div>

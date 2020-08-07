@@ -26,7 +26,7 @@ function Room({room}: CardProps) {
 
   return (
     <div onClick={handleClick} className="card m-3 room-tile" style={{ maxWidth: 540 }}>
-        <div className="row no-gutters">
+        <div className="row no-gutters h-100">
             <div className="col-md-4 illustration">
                 <img src={room.images[0]} alt="..."/>
             </div>

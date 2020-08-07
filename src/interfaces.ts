@@ -19,6 +19,7 @@ export interface IProperty {
     description:string,
     date:       string,
     size:       number,
+    address:    string,
     images:     [string],
     rooms:      [IRoom]
 }

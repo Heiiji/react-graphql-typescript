@@ -10,6 +10,7 @@ const PropertyHead = ({property} : PropertyHeadProps) => {
         <img src={property.images[0]} width={100} className="align-self-end mr-3" alt="..."/>
             <div className="media-body">
                 <h5 className="mt-0">{`${property.location} - ${property.size}m²`}</h5>
+                <small>{property.address}</small>
                 <p>{property.description}</p>
             </div>
         </div>

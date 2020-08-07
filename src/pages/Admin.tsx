@@ -18,6 +18,7 @@ function AdminDetails() {
         date,
         size,
         images,
+        address,
         rooms{
             id,
             active,

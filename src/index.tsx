@@ -5,7 +5,6 @@ import Router from './Router';
 import { Provider } from "react-redux";
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import store from "./store";
 import { BrowserRouter } from "react-router-dom";
 

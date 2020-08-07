@@ -98,7 +98,10 @@ function AdminDetails() {
                         </Modal>
 
                         {
-                            selection ? <PropertyHead property={selection} /> : ""
+                            selection ? <>
+                                <button className="btn btn-outline-primary" onClick={() => setSeletion(undefined)}> Back</button>
+                                <PropertyHead property={selection} />
+                            </>: ""
                         }
                         <ul className="list-group properties-list">
                             {

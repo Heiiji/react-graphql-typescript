@@ -1,15 +1,11 @@
 import React, {useState} from 'react';
-import Header from '../organism/Header';
 import {gql, useQuery} from "@apollo/client";
-import {IProperty, IRoom} from "../interfaces";
+import {IProperty} from "../interfaces";
 import StateSnippet from "../molecules/StateSnippet";
-import PropertyHead from "../molecules/PropertyHead";
-import Modal from "../molecules/Modal";
 import AdminPropertyView from "../organism/AdminPropertyView";
 
 function AdminDetails() {
     const [selection, setSeletion] = useState<IProperty>();
-    const [modalShow, setModalShow] = useState<boolean>(false);
     const query = gql`
 {
     properties(userId: "2"){
@@ -86,19 +82,12 @@ function AdminDetails() {
 
     return (
         <div>
-            <Header/>
             <div className="container">
                 <div className="row mt-5">
                     <div className="col-md-8">
                         <h1 className="mb-4">
                             { selection ? `${selection.address}` : "My properties"}
                         </h1>
-
-
-                        {/*<Modal title="Manage" show={modalShow} onHide={() => setModalShow(false)}>
-                            <p>coucou</p>
-                                <PropertyHead property={selection} />
-                        </Modal>*/}
 
                         {
                             selection ? <>

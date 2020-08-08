@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Header from '../organism/Header';
 import {connectUser} from "../store/user/actions";
 import { withRouter } from 'react-router-dom';
 
@@ -23,7 +22,12 @@ function Auth(props: any) {
         setAlert("");
         setLoading(true);
         connectUser(email, password).then(res => {
-            props.history.push('/')
+            if (props.redirect !== false) {
+                props.history.push('/')
+            }
+            if (props.onLogged) {
+                props.onLogged();
+            }
         }).catch(() => {
             setLoading(false);
             setAlert("Invalid Credentials");
@@ -32,7 +36,6 @@ function Auth(props: any) {
 
     return (
         <div>
-            <Header/>
             <div className="container">
                 <div className="row align-items-center justify-content-center">
                     <form className="col-md-7 mt-5 text-center" onSubmit={_onSubmit}>

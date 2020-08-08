@@ -4,15 +4,16 @@ type ModalProps = {
     onHide: any,
     show: boolean,
     children: any,
-    title: string
+    title: string,
+    className: string | undefined
 }
 
-const Modal = ({ show, onHide, children, title }: ModalProps) => {
+const Modal = ({ show, onHide, children, title, className }: ModalProps) => {
     return (
         <div onClick={onHide} className={`my-modal-back ${show ? '' : 'hidden'}`}>
-            <div onClick={ev => ev.stopPropagation()} className="my-modal-body">
+            <div onClick={ev => ev.stopPropagation()} className={`my-modal-body ${className}`}>
                 <div className="my-modal-header">
-                    a title
+                    {title}
                 </div>
                 <div>
                     {

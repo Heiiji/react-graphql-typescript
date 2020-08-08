@@ -1,12 +1,18 @@
 import React, {useState} from 'react';
-import Header from '../organism/Header';
 import { useParams } from "react-router-dom";
 import {gql, useQuery} from "@apollo/client";
 import StateSnippet from "../molecules/StateSnippet";
+import Modal from "../molecules/Modal";
+import Auth from "./Auth";
+import {useSelector} from "react-redux";
+import {getUser} from "../store/selectors";
 
 function RoomDetails() {
+    const user = useSelector(getUser);
     const { roomId } = useParams();
+    const [modalShow, setModalShow] = useState<boolean>(false);
     const [activeImage, setActiveImage] = useState(0);
+    const [booked, setBooked] = useState(false);
     const query = gql`
 {
     room(id: "${roomId}"){
@@ -56,9 +62,20 @@ function RoomDetails() {
         setActiveImage(cursor);
     }
 
+    const _isLogged = () => {
+        setModalShow(false);
+        setBooked(true);
+    }
+
+    const book = () => {
+        if (user.isConnected) {
+            setBooked(true);
+        } else {
+            setModalShow(true);
+        }
+    }
     return (
         <div>
-            <Header/>
             <div className="container">
                 <div className="row mt-5">
                     <div className="col-md-8">
@@ -100,10 +117,17 @@ function RoomDetails() {
                     </div>
                     <div className="col-md-4">
                         <StateSnippet title="Price" state={data.room.price + "€"} highlight={""}/>
-                        <div className="cta-container">
-                            <button className="cta">Book now!</button>
-                        </div>
+                        {
+                            booked ? <div className="cta-container">
+                                <button className="cta bg-success">Reserved</button>
+                            </div> : <div className="cta-container">
+                                <button className="cta" onClick={book}>Book now!</button>
+                            </div>
+                        }
                     </div>
+                    <Modal className="pb-5" title="login to book now!" show={modalShow} onHide={() => setModalShow(false)}>
+                        <Auth redirect={false} onLogged={_isLogged}/>
+                    </Modal>
                 </div>
             </div>
         </div>

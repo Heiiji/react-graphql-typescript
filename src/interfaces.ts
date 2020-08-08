@@ -9,7 +9,7 @@ export interface IUser {
 export interface IBooking {
     id:         string,
     date:       string,
-    userId:     string
+    user:       IUser,
     message:    string
 }
 

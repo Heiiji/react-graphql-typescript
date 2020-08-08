@@ -50,7 +50,7 @@ function RoomDetails() {
 }
 `;
     const { loading, error, data } = useQuery(query);
-    const [addBook, mutateData] = useMutation(ADD_BOOK);
+    const [addBook] = useMutation(ADD_BOOK);
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 

@@ -1,5 +1,7 @@
-import React from "react";
-import {IProperty} from "../interfaces";
+import React, {useState} from "react";
+import {IProperty, IRoom} from "../interfaces";
+import Modal from "../molecules/Modal";
+import BookingView from "./BookingView";
 
 
 type PropertyHeadProps = {
@@ -7,6 +9,14 @@ type PropertyHeadProps = {
 }
 
 const AdminPropertyView = ({property} : PropertyHeadProps) => {
+    const [modalShow, setModalShow] = useState<boolean>(false);
+    const [selectedRoom, setSelectedRoom] = useState(property.rooms[0]);
+
+    const selectRoom = (room :IRoom) => {
+        setSelectedRoom(room);
+        setModalShow(true);
+    }
+
     return (
         <div className="container mt-4">
             <div className="row justify-content-around pb-4 border-bottom flex-nowrap overflow-hidden">
@@ -17,9 +27,15 @@ const AdminPropertyView = ({property} : PropertyHeadProps) => {
             <div className="row justify-content-around mt-3 pb-4 border-bottom">
                 <h3 className="col-12">Rooms</h3>
                 {
-                    property.rooms.map(room => <div key={room.id} className="card" style={{width: "18rem"}}>
+                    property.rooms.map(room => <div onClick={() => selectRoom(room)} key={room.id} className="card" style={{width: "18rem", cursor: "pointer"}}>
                         <img src={room.images[0]} className="card-img-top" alt="..."/>
                         <div className="card-body">
+                            {
+                                room.active ? <span className="badge badge-success badge-pill">active</span> : ""
+                            }
+                            {
+                                room.bookings.length > 0 ? <span className="badge badge-primary badge-pill">{room.bookings.length}</span> : ""
+                            }
                             <p className="card-text">{room.description}</p>
                         </div>
                     </div>)
@@ -33,6 +49,9 @@ const AdminPropertyView = ({property} : PropertyHeadProps) => {
                     <p><b>description :</b> {property.description}</p>
                 </div>
             </div>
+            <Modal className="pb-5" title="Reservations" show={modalShow} onHide={() => setModalShow(false)}>
+                <BookingView room={selectedRoom}/>
+            </Modal>
         </div>
     );
 }

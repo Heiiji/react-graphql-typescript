@@ -27,8 +27,11 @@ function AdminDetails() {
             bookings{
                 id,
                 date,
-                userId,
-                message
+                message,
+                user {
+                    id,
+                    firstName
+                }
             }
         }
     }

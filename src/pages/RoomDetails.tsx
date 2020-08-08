@@ -1,11 +1,22 @@
 import React, {useState} from 'react';
 import { useParams } from "react-router-dom";
-import {gql, useQuery} from "@apollo/client";
+import {gql, useQuery, useMutation} from "@apollo/client";
 import StateSnippet from "../molecules/StateSnippet";
 import Modal from "../molecules/Modal";
 import Auth from "./Auth";
 import {useSelector} from "react-redux";
 import {getUser} from "../store/selectors";
+
+const ADD_BOOK = gql`
+  mutation AddBook($userId: String!, $roomId: String!) {
+    addBook(userId: $userId, roomId: $roomId) {
+      id
+      userId,
+      roomId
+    }
+  }
+`;
+
 
 function RoomDetails() {
     const user = useSelector(getUser);
@@ -37,8 +48,9 @@ function RoomDetails() {
         }
     }
 }
-`
+`;
     const { loading, error, data } = useQuery(query);
+    const [addBook, mutateData] = useMutation(ADD_BOOK);
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
@@ -62,18 +74,19 @@ function RoomDetails() {
         setActiveImage(cursor);
     }
 
-    const _isLogged = () => {
-        setModalShow(false);
-        setBooked(true);
-    }
-
     const book = () => {
         if (user.isConnected) {
+            addBook({ variables: { userId: user.id, roomId: roomId } });
             setBooked(true);
         } else {
             setModalShow(true);
         }
     }
+
+    const _isLogged = () => {
+        setModalShow(false);
+    }
+
     return (
         <div>
             <div className="container">

@@ -5,6 +5,7 @@ import {IProperty, IRoom} from "../interfaces";
 import StateSnippet from "../molecules/StateSnippet";
 import PropertyHead from "../molecules/PropertyHead";
 import Modal from "../molecules/Modal";
+import AdminPropertyView from "../organism/AdminPropertyView";
 
 function AdminDetails() {
     const [selection, setSeletion] = useState<IProperty>();
@@ -90,42 +91,32 @@ function AdminDetails() {
                 <div className="row mt-5">
                     <div className="col-md-8">
                         <h1 className="mb-4">
-                            My properties
+                            { selection ? `${selection.address}` : "My properties"}
                         </h1>
 
 
-                        <Modal title="Manage" show={modalShow} onHide={() => setModalShow(false)} >
+                        {/*<Modal title="Manage" show={modalShow} onHide={() => setModalShow(false)}>
                             <p>coucou</p>
-                        </Modal>
+                                <PropertyHead property={selection} />
+                        </Modal>*/}
 
                         {
                             selection ? <>
                                 <button className="btn btn-outline-primary" onClick={() => setSeletion(undefined)}> Back</button>
-                                <PropertyHead property={selection} />
-                            </>: ""
-                        }
-                        <ul className="list-group properties-list">
-                            {
-                                selection ? selection.rooms.map((room:IRoom) => <li onClick={() => setModalShow(true)} key={room.id} className="list-group-item d-flex justify-content-between align-items-center">
-                                    { `${room.price}€ - ${room.size}m²` }
-                                    {
-                                        room.bookings.length > 0 ?
-                                        <span className="badge badge-primary badge-pill">{room.bookings.length}</span> : ""
-                                    }
-                                    {
-                                        room.active ?
-                                            <span className="badge badge-success badge-pill">active</span> : ""
-                                    }
-                                </li>)
-                                    : data.properties.map((property:IProperty) => <li key={property.id} onClick={() => setSeletion(property)} className="list-group-item d-flex justify-content-between align-items-center">
-                                        { `${property.location} - ${property.size}m²` }
-                                        {
-                                            getPropertyBadge(property) ? <span className="badge badge-primary badge-pill">{getPropertyBadge(property)}</span> : ""
-                                        }
-                                    </li>)
+                                <AdminPropertyView property={selection} />
+                            </>: <ul className="list-group properties-list">
+                                {
+                                    data.properties.map((property:IProperty) => <li key={property.id} onClick={() => setSeletion(property)} className="list-group-item d-flex justify-content-between align-items-center">
+                                            { `${property.location} - ${property.size}m²` }
+                                            {
+                                                getPropertyBadge(property) ? <span className="badge badge-primary badge-pill">{getPropertyBadge(property)}</span> : ""
+                                            }
+                                        </li>)
 
-                            }
-                        </ul>
+                                }
+                            </ul>
+                        }
+
                     </div>
                     <div className="col-md-4 mt-4">
                         <StateSnippet title="Actives rooms" state={getState()} highlight={getHighlight()} />

@@ -103,7 +103,7 @@ function AdminDetails() {
                                 <AdminPropertyView property={selection} />
                             </>: <ul className="list-group properties-list">
                                 {
-                                    data.properties.map((property:IProperty) => <li key={property.id} onClick={() => getBookings("2")} className="list-group-item d-flex justify-content-between align-items-center">
+                                    data.properties.map((property:IProperty) => <li key={property.id} onClick={() => setSeletion(property)} className="list-group-item d-flex justify-content-between align-items-center">
                                             { `${property.location} - ${property.size}m²` }
                                             {
                                                 getPropertyBadge(property) ? <span className="badge badge-primary badge-pill">{getPropertyBadge(property)}</span> : ""

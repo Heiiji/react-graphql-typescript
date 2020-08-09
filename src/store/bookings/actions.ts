@@ -1,4 +1,4 @@
-import {IBooking} from "../../interfaces";
+import {IBooking, IRoom} from "../../interfaces";
 import store from "../index";
 import {SET_BOOKINGS} from "./types";
 import { client } from "../../_helpers/apollo";
@@ -22,6 +22,7 @@ export const getBookings = (userId: string) => {
                     rooms{
                         id
                         bookings{
+                            roomId,
                             id,
                             date,
                             user{
@@ -35,7 +36,15 @@ export const getBookings = (userId: string) => {
                 }
             `
         }).then(response => {
-            console.log(response)
+            let bookings = response.data.user.rooms.reduce((result : Array<IBooking>, elem : IRoom) => {
+                result = result.concat(elem.bookings);
+                return result;
+            }, []);
+            store.dispatch({
+                type: SET_BOOKINGS,
+                payload: bookings
+            });
+            resolve(bookings);
         }).catch(err => {
             console.error(err);
             reject(err);

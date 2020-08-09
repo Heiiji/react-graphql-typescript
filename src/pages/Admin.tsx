@@ -3,7 +3,6 @@ import {gql, useQuery} from "@apollo/client";
 import {IProperty} from "../interfaces";
 import StateSnippet from "../molecules/StateSnippet";
 import AdminPropertyView from "../organism/AdminPropertyView";
-import {getBookings} from "../store/bookings/actions";
 
 function AdminDetails() {
     const [selection, setSeletion] = useState<IProperty>();

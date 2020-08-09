@@ -6,6 +6,7 @@ import Modal from "../molecules/Modal";
 import Auth from "./Auth";
 import {useSelector} from "react-redux";
 import {getUser} from "../store/selectors";
+import {IUser} from "../interfaces";
 
 const ADD_BOOK = gql`
   mutation AddBook($userId: String!, $roomId: String!) {
@@ -84,8 +85,10 @@ function RoomDetails() {
         }
     }
 
-    const _isLogged = () => {
+    const _isLogged = (newUser: IUser) => {
         setModalShow(false);
+        addBook({ variables: { userId: newUser.id, roomId: roomId } });
+        setBooked(true);
     }
 
     return (

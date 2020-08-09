@@ -21,12 +21,12 @@ function Auth(props: any) {
         }
         setAlert("");
         setLoading(true);
-        connectUser(email, password).then(res => {
+        connectUser(email, password).then(user => {
             if (props.redirect !== false) {
                 props.history.push('/')
             }
             if (props.onLogged) {
-                props.onLogged();
+                props.onLogged(user);
             }
         }).catch(() => {
             setLoading(false);

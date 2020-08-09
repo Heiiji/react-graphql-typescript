@@ -2,7 +2,7 @@ export interface Search {
     text: string
 }
 
-// L'obet sera augmenté selon les parametres (tags, prix)
+// L'objet sera augmenté selon les parametres (tags, prix)
 
 export const SET_SEARCH = "SET_SEARCH";
 export const CLEAR_SEARCH = "CLEAR_SEARCH";

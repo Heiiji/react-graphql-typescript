@@ -1,4 +1,4 @@
-import {SearchActionsTypes, SearchState} from "./types";
+import {CLEAR_SEARCH, SearchActionsTypes, SearchState, SET_SEARCH} from "./types";
 
 const initialState :SearchState = {
     text: ""
@@ -9,9 +9,9 @@ export function searchReducer(
     action: SearchActionsTypes
 ) : SearchState {
     switch (action.type) {
-        case "SET_SEARCH":
+        case SET_SEARCH:
             return action.payload;
-        case "CLEAR_SEARCH":
+        case CLEAR_SEARCH:
             return {
                 text: ""
             }

@@ -10,6 +10,7 @@ export interface IBooking {
     id:         string,
     date:       string,
     user:       IUser,
+    roomId:     string,
     message:    string
 }
 

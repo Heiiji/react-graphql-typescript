@@ -1,31 +1,27 @@
 import React from "react";
-import {IRoom} from "../interfaces";
+import {IBooking, IRoom} from "../interfaces";
 import moment from "moment";
-import {gql, useMutation} from "@apollo/client";
+import {useSelector} from "react-redux";
+import {getBookings} from "../store/selectors";
+import {removeOneBooking} from "../store/bookings/actions";
 
 type BookingViewProp = {
     room: IRoom
 }
 
-const DELETE_BOOK = gql`
-  mutation deleteBook($id: String!) {
-    deleteBook(id: $id) {
-      id
-    }
-  }
-`;
-
 const BookingView = ({room} : BookingViewProp) => {
-    const [deleteBook] = useMutation(DELETE_BOOK);
+    const bookings = useSelector(getBookings);
 
     const _onDeleteBook = (id: string) => {
-        deleteBook({ variables: { id } });
+        removeOneBooking(id).catch(err => {
+            console.log("error on book dletion", err);
+        });
     }
 
     return (
         <div>
             {
-                room.bookings.length > 0 ? <ul className="list-group properties-list">
+                bookings.filter((book: IBooking) => book.roomId === room.id).length > 0 ? <ul className="list-group properties-list">
                     {
                         room.bookings.map(book => <li key={book.id} className="list-group-item d-flex justify-content-between align-items-center bg-white">
                             {`${book.user.firstName} - ${moment(book.date).fromNow()}`}

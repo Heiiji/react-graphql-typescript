@@ -3,12 +3,15 @@ import {gql, useQuery} from "@apollo/client";
 import {IProperty} from "../interfaces";
 import StateSnippet from "../molecules/StateSnippet";
 import AdminPropertyView from "../organism/AdminPropertyView";
+import {useSelector} from "react-redux";
+import {getUser} from "../store/selectors";
 
 function AdminDetails() {
+    const user = useSelector(getUser);
     const [selection, setSeletion] = useState<IProperty>();
     const query = gql`
 {
-    properties(userId: "2"){
+    properties(userId: "${user.id}"){
         id,
         location,
         description,

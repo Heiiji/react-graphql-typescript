@@ -1,22 +1,13 @@
 import React, {useState} from 'react';
 import { useParams } from "react-router-dom";
-import {gql, useQuery, useMutation} from "@apollo/client";
+import {gql, useQuery} from "@apollo/client";
 import StateSnippet from "../molecules/StateSnippet";
 import Modal from "../molecules/Modal";
 import Auth from "./Auth";
 import {useSelector} from "react-redux";
 import {getUser} from "../store/selectors";
 import {IUser} from "../interfaces";
-
-const ADD_BOOK = gql`
-  mutation AddBook($userId: String!, $roomId: String!) {
-    addBook(userId: $userId, roomId: $roomId) {
-      id
-      userId,
-      roomId
-    }
-  }
-`;
+import {bookRoom} from "../store/bookings/actions";
 
 
 function RoomDetails() {
@@ -52,7 +43,6 @@ function RoomDetails() {
 }
 `;
     const { loading, error, data } = useQuery(query);
-    const [addBook] = useMutation(ADD_BOOK);
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
@@ -78,8 +68,11 @@ function RoomDetails() {
 
     const book = () => {
         if (user.isConnected) {
-            addBook({ variables: { userId: user.id, roomId: roomId } });
-            setBooked(true);
+            bookRoom(user.id, roomId).then(() => {
+                setBooked(true);
+            }).catch(() => {
+                // TODO : display an error
+            })
         } else {
             setModalShow(true);
         }
@@ -87,8 +80,11 @@ function RoomDetails() {
 
     const _isLogged = (newUser: IUser) => {
         setModalShow(false);
-        addBook({ variables: { userId: newUser.id, roomId: roomId } });
-        setBooked(true);
+        bookRoom(newUser.id, roomId).then(() => {
+            setBooked(true);
+        }).catch(() => {
+            // TODO : display an error
+        })
     }
 
     return (

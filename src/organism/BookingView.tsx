@@ -2,7 +2,7 @@ import React from "react";
 import {IBooking, IRoom} from "../interfaces";
 import moment from "moment";
 import {useSelector} from "react-redux";
-import {getBookings} from "../store/selectors";
+import {getRoomBookings} from "../store/selectors";
 import {removeOneBooking} from "../store/bookings/actions";
 
 type BookingViewProp = {
@@ -10,20 +10,20 @@ type BookingViewProp = {
 }
 
 const BookingView = ({room} : BookingViewProp) => {
-    const bookings = useSelector(getBookings);
+    const bookings = useSelector((state) => getRoomBookings(state, room.id));
 
     const _onDeleteBook = (id: string) => {
         removeOneBooking(id).catch(err => {
-            console.log("error on book dletion", err);
+            console.log("error on book deletion", err);
         });
     }
 
     return (
         <div>
             {
-                bookings.filter((book: IBooking) => book.roomId === room.id).length > 0 ? <ul className="list-group properties-list">
+                bookings.length > 0 ? <ul className="list-group properties-list">
                     {
-                        room.bookings.map(book => <li key={book.id} className="list-group-item d-flex justify-content-between align-items-center bg-white">
+                        bookings.map((book : IBooking) => <li key={book.id} className="list-group-item d-flex justify-content-between align-items-center bg-white">
                             {`${book.user.firstName} - ${moment(book.date).fromNow()}`}
                             <button onClick={() => _onDeleteBook(book.id)} className="btn btn-outline-danger">Refuse</button>
                         </li>)

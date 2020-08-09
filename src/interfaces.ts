@@ -32,7 +32,7 @@ export interface IRoom {
     price:      number,
     active:     boolean,
     images:     [string],
-    bookings:   [IBooking],
+    bookings:   Array<IBooking>,
     user:       IUser,
     property:   IProperty
 }

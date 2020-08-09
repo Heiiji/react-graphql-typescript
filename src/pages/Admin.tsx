@@ -24,6 +24,10 @@ function AdminDetails() {
             description,
             date,
             images,
+            tenant{
+                id,
+                firstName
+            },
             bookings{
                 id,
                 date,

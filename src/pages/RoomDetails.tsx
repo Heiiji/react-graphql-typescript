@@ -42,6 +42,7 @@ function RoomDetails() {
             id,
             location,
             images,
+            address,
             description,
             date,
             size
@@ -122,7 +123,10 @@ function RoomDetails() {
                                 <span className="sr-only">Next</span>
                             </a>
                         </div>
-                        <h3>{`${data.room.property.location} - ${data.room.size}m`}</h3>
+                        <h3>{`${data.room.property.location} - ${data.room.size}m²`}</h3>
+                        <p>
+                            address : { data.room.property.address }
+                        </p>
                         <p>{data.room.description}</p>
                         <hr/>
                         <h3>{`Property - ${data.room.property.size}m`}</h3>

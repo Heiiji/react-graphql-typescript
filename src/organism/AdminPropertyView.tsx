@@ -36,6 +36,9 @@ const AdminPropertyView = ({property} : PropertyHeadProps) => {
                             {
                                 room.bookings.length > 0 ? <span className="badge badge-primary badge-pill">{room.bookings.length}</span> : ""
                             }
+                            {
+                                room.active ? <p className="card-text">Tenant : {room.tenant.firstName}</p> : ""
+                            }
                             <p className="card-text">{room.description}</p>
                         </div>
                     </div>)

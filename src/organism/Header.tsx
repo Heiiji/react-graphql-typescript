@@ -5,7 +5,7 @@ import { getUser } from '../store/selectors';
 import { disconnectUser } from '../store/user/actions';
 import { useLocation } from 'react-router-dom';
 
-function Header() {
+function Header(): JSX.Element {
   const user = useSelector(getUser);
   const [collapse, setCollapse] = useState(true);
   const location = useLocation();

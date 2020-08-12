@@ -29,7 +29,7 @@ const query = gql`
   }
 `;
 
-function RoomList(props: any) {
+const RoomList = (): JSX.Element => {
   const storeSearch = useSelector(getSearch);
   const { loading, error, data } = useQuery(query);
   if (loading) return <p>Loading...</p>;
@@ -53,6 +53,6 @@ function RoomList(props: any) {
       </div>
     </div>
   );
-}
+};
 
 export default RoomList;

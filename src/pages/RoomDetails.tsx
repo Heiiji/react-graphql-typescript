@@ -9,7 +9,7 @@ import { getUser } from '../store/selectors';
 import { IUser } from '../interfaces';
 import { bookRoom } from '../store/bookings/actions';
 
-function RoomDetails() {
+function RoomDetails(): JSX.Element {
   const user = useSelector(getUser);
   const { roomId } = useParams();
   const [modalShow, setModalShow] = useState<boolean>(false);

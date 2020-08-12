@@ -2,12 +2,48 @@ import React from 'react';
 import moment from 'moment';
 import { IRoom } from '../interfaces';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
 type CardProps = {
   room: IRoom;
 };
 
-function Room({ room }: CardProps) {
+const RoomComponent = styled.div`
+  transition: 0.2s;
+  cursor: pointer;
+  border-color: rgba(200, 200, 200, 0.2);
+
+  .description {
+    overflow: hidden;
+    font-size: 1em;
+    line-height: 1.2em;
+  }
+
+  .illustration {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: red;
+    img {
+      transition: 0.5s;
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      min-width: 100%;
+      object-fit: cover;
+      transform: scale(1.05);
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 0 6px rgba(100, 100, 100, 0.2);
+    img {
+      transform: scale(1);
+    }
+  }
+`;
+
+function Room({ room }: CardProps): JSX.Element {
   const history = useHistory();
 
   const handleClick = () => {
@@ -25,7 +61,7 @@ function Room({ room }: CardProps) {
   };
 
   return (
-    <div onClick={handleClick} className="card m-3 room-tile" style={{ maxWidth: 540 }}>
+    <RoomComponent onClick={handleClick} className="card m-3" style={{ maxWidth: 540 }}>
       <div className="row no-gutters h-100">
         <div className="col-md-4 illustration">
           <img src={room.images[0]} alt="..." />
@@ -38,7 +74,7 @@ function Room({ room }: CardProps) {
           </div>
         </div>
       </div>
-    </div>
+    </RoomComponent>
   );
 }
 
